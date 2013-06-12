@@ -1,0 +1,13 @@
+{
+	"id": "ytPlayer",
+	"name": "ytPlayer",
+	"description" : "Cross-platform YouTube streaming video player using Ti.Media.VideoPlayer",
+	"author": "Bob Sims",
+	"version": "1.0",
+	"copyright":"Copyright (c) 2012",
+	"license":"Public Domain",
+	"min-alloy-version": "1.0",
+	"min-titanium-version":"2.1",
+	"tags":"youtube,videoplayer,streaming",
+	"platforms":"android,ios"
+}

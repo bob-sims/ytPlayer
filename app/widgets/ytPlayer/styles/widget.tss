@@ -1,0 +1,7 @@
+"#videoPlayer": {
+	backgroundColor: '#000',
+    fullscreen: true,
+    autoplay: true,
+    scalingMode: Ti.Media.VIDEO_SCALING_ASPECT_FIT,
+    mediaControlMode: Ti.Media.VIDEO_CONTROL_DEFAULT 
+}

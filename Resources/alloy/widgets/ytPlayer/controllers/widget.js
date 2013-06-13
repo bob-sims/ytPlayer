@@ -1,7 +1,7 @@
 function WPATH(s) {
     var index = s.lastIndexOf("/");
     var path = -1 === index ? "ytPlayer/" + s : s.substring(0, index) + "/ytPlayer/" + s.substring(index + 1);
-    return path;
+    return true && 0 !== path.indexOf("/") ? "/" + path : path;
 }
 
 function Controller() {
@@ -17,13 +17,12 @@ function Controller() {
             Ti.API.info("stream url: " + streamUrl);
             playVideo(streamUrl);
         };
-        client.setRequestHeader("Referer", "http://www.youtube.com/watch?v=" + id);
-        client.setRequestHeader("User-Agent", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_2) AppleWebKit/536.26.14 (KHTML, like Gecko) Version/6.0.1 Safari/536.26.14");
         client.open("GET", "http://m.youtube.com/watch?ajax=1&layout=mobile&tsp=1&utcoffset=330&v=" + id);
+        client.setRequestHeader("Referer", "http://www.youtube.com/watch?v=" + id);
+        client.setRequestHeader("User-Agent", "Mozilla/5.0 (Linux; U; Android 2.2.1; en-gb; GT-I9003 Build/FROYO) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1");
         client.send();
     }
     function playVideo(url) {
-        win = Widget.createController("window").getView();
         $.videoPlayer.setUrl(url);
         $.videoPlayer.addEventListener("complete", function() {
             Ti.API.info("video player complete");
@@ -35,10 +34,8 @@ function Controller() {
                 exports.close();
             }
         });
-        win.add($.videoPlayer);
-        win.open();
     }
-    var Widget = new (require("alloy/widget"))("ytPlayer");
+    new (require("alloy/widget"))("ytPlayer");
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     arguments[0] ? arguments[0]["__parentSymbol"] : null;
     arguments[0] ? arguments[0]["$model"] : null;
@@ -56,7 +53,6 @@ function Controller() {
     $.__views.videoPlayer && $.addTopLevelView($.__views.videoPlayer);
     exports.destroy = function() {};
     _.extend($, $.__views);
-    var win = null;
     exports.isPlaying = false;
     exports.play = function(id) {
         console.info("id: " + id);
@@ -65,8 +61,9 @@ function Controller() {
     };
     exports.close = function() {
         Ti.API.info("closing video player");
-        $.videoPlayer.fullscreen = false;
-        win.close();
+        $.videoPlayer.hide();
+        $.videoPlayer.release();
+        $.videoPlayer = null;
         exports.isPlaying = false;
     };
     _.extend($, exports);

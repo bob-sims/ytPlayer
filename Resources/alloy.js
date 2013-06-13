@@ -81,7 +81,8 @@ exports.createCollection = function(name, args) {
 };
 
 exports.isTablet = function() {
-    return "ipad" === Ti.Platform.osname;
+    var psc = Ti.Platform.Android.physicalSizeCategory;
+    return psc === Ti.Platform.Android.PHYSICAL_SIZE_CATEGORY_LARGE || psc === Ti.Platform.Android.PHYSICAL_SIZE_CATEGORY_XLARGE;
 }();
 
 exports.isHandheld = !exports.isTablet;
@@ -101,3 +102,7 @@ exports.Collections.instance = function(name) {
 };
 
 exports.CFG = require("alloy/CFG");
+
+exports.Android = {};
+
+exports.Android.menuItemCreateArgs = [ "itemId", "groupId", "title", "order", "actionView", "checkable", "checked", "enabled", "icon", "showAsAction", "titleCondensed", "visible" ];

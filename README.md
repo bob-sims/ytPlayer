@@ -14,8 +14,10 @@ Be sure to update your project's `config.json` file, add `"ytPlayer": "1.0"` to 
 In your controller: 
 
     // call method .play(), pass YouTube ID of video to play
-    var ytPlayer = Alloy.createWidget('ytPlayer').play('BXb5zeaaZss');
+    Alloy.createWidget('ytPlayer').play('BXb5zeaaZss');
 
- That's it!
+See [sample app](https://github.com/bob-sims/ytPlayer/tree/master/app).
+
+That's it!
  
- [@2wheelsburing](http://www.twitter.com/2wheelsburing)
+[@2wheelsburing](http://www.twitter.com/2wheelsburing)

@@ -20,4 +20,4 @@ See [sample app](https://github.com/bob-sims/ytPlayer/tree/master/app).
 
 That's it!
  
-[@2wheelsburing](http://www.twitter.com/2wheelsburing)
+[@2wheelsburning](http://www.twitter.com/2wheelsburning)

@@ -2,7 +2,7 @@
 
 //var lib = Alloy.Globals;
  
-var win = null
+var win = null;
  
 exports.isPlaying = false;
  
@@ -15,15 +15,15 @@ exports.play = function(id) {
 function getVideo(id) {
     var client = Ti.Network.createHTTPClient();
     client.onload = function () {
-        var json = decodeURIComponent(decodeURIComponent(decodeURIComponent(decodeURIComponent(this.responseText.substring(4, this.responseText.length)))));
+        var json = (this.responseText.substring(4, this.responseText.length));
+        //console.info('json: '+json);
         var response = JSON.parse(json);
-        var video = response.content.video;
-        var isHighQuality = video['fmt_stream_map'] != null;
-        var streamUrl = isHighQuality ? video['fmt_stream_map'][0].url : video.stream_url;
+        var isHighQuality = response.content['player_data']['fmt_stream_map'] != null;
+        var streamUrl = isHighQuality ? response.content['player_data']['fmt_stream_map'][0].url : '';
         if(!isHighQuality) {
             Ti.API.info('using low quality video because fmt_stream_map does not exist in json response, User-Agent probably is not being sent correctly');
         }
-        Ti.API.info('stream url: ' + streamUrl);
+        console.info('stream url: ' + streamUrl);
         playVideo(streamUrl);
     };
     if(OS_IOS) {

@@ -10,13 +10,17 @@ function getVideo(id) {
         Ti.API.info("stream url: " + streamUrl);
         playVideo(streamUrl);
     };
-    client.open("GET", "http://m.youtube.com/watch?ajax=1&layout=mobile&tsp=1&utcoffset=330&v=" + id);
     client.setRequestHeader("Referer", "http://www.youtube.com/watch?v=" + id);
-    client.setRequestHeader("User-Agent", "Mozilla/5.0 (Linux; U; Android 2.2.1; en-gb; GT-I9003 Build/FROYO) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1");
+    client.setRequestHeader("User-Agent", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_2) AppleWebKit/536.26.14 (KHTML, like Gecko) Version/6.0.1 Safari/536.26.14");
+    client.open("GET", "http://m.youtube.com/watch?ajax=1&layout=mobile&tsp=1&utcoffset=330&v=" + id);
     client.send();
 }
 
 function playVideo(url) {
+    win = Ti.UI.createWindow({
+        title: "View Training Video",
+        backgroundColor: "#000"
+    });
     videoPlayer = Ti.Media.createVideoPlayer({
         backgroundColor: "#000",
         url: url,
@@ -35,6 +39,8 @@ function playVideo(url) {
             exports.close();
         }
     });
+    win.add(videoPlayer);
+    win.open();
 }
 
 var win = null, videoPlayer = null;
@@ -49,8 +55,7 @@ exports.play = function(id) {
 
 exports.close = function() {
     Ti.API.info("closing video player");
-    videoPlayer.hide();
-    videoPlayer.release();
-    videoPlayer = null;
+    videoPlayer.fullscreen = false;
+    win.close();
     exports.isPlaying = false;
 };

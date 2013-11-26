@@ -27,7 +27,7 @@ function playVideo(url) {
         fullscreen: true,
         autoplay: true,
         scalingMode: Ti.Media.VIDEO_SCALING_ASPECT_FIT,
-        mediaControlMode: Ti.Media.VIDEO_CONTROL_DEFAULT
+        mediaControlStyle: Ti.Media.VIDEO_CONTROL_DEFAULT
     });
     videoPlayer.addEventListener("complete", function() {
         Ti.API.info("video player complete");

@@ -1,3 +1,9 @@
 "#vidWin": {
-	backgroundColor: '#000'
+	backgroundColor: '#000',
+	
+	// or it will not show over modals
+	modal: true,
+	
+	// we don't actually need to see the window
+	opacity: 0
 }

@@ -55,7 +55,9 @@ function playVideo(url) {
     });
     if(OS_IOS) {
         win.add($.videoPlayer);
-        win.open();
+        win.open({
+        	animated: false
+        });
     }
 }
  
